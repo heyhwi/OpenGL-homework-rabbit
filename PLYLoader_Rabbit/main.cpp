@@ -129,10 +129,6 @@ int main(int argc, char* argv[])
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
 
-
-
-
-
 	glutReshapeFunc(myReshape);
 	glutDisplayFunc(display);
 	//glutIdleFunc(spinCube);
