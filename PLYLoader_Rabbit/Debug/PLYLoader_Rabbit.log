@@ -1,2 +1,14 @@
-﻿  Loader.cpp
+﻿  main.cpp
+c:\users\huwei\desktop\codes\github\opengl-homework-rabbit\plyloader_rabbit\main.cpp(76): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\huwei\desktop\codes\github\opengl-homework-rabbit\plyloader_rabbit\main.cpp(83): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\huwei\desktop\codes\github\opengl-homework-rabbit\plyloader_rabbit\main.cpp(94): warning C4244: “=”: 从“int”转换到“GLfloat”，可能丢失数据
+c:\users\huwei\desktop\codes\github\opengl-homework-rabbit\plyloader_rabbit\main.cpp(95): warning C4244: “=”: 从“int”转换到“GLfloat”，可能丢失数据
+c:\users\huwei\desktop\codes\github\opengl-homework-rabbit\plyloader_rabbit\main.cpp(105): warning C4244: “=”: 从“int”转换到“GLfloat”，可能丢失数据
+c:\users\huwei\desktop\codes\github\opengl-homework-rabbit\plyloader_rabbit\main.cpp(106): warning C4244: “=”: 从“int”转换到“GLfloat”，可能丢失数据
+c:\users\huwei\desktop\codes\github\opengl-homework-rabbit\plyloader_rabbit\main.cpp(127): warning C4305: “+=”: 从“double”到“GLfloat”截断
+c:\users\huwei\desktop\codes\github\opengl-homework-rabbit\plyloader_rabbit\main.cpp(128): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\huwei\desktop\codes\github\opengl-homework-rabbit\plyloader_rabbit\main.cpp(139): warning C4244: “=”: 从“int”转换到“GLfloat”，可能丢失数据
+c:\users\huwei\desktop\codes\github\opengl-homework-rabbit\plyloader_rabbit\main.cpp(140): warning C4244: “=”: 从“int”转换到“GLfloat”，可能丢失数据
+  Loader.cpp
+  正在生成代码...
   PLYLoader_Rabbit.vcxproj -> C:\Users\huwei\Desktop\Codes\github\OpenGL-homework-rabbit\Debug\PLYLoader_Rabbit.exe

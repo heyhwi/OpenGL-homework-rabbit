@@ -26,7 +26,6 @@ public:
 	void myDraw();
 	void DrawPoints();
 	void DrawTriangles();
-	void DrawFill();
 	void DrawGrids();
 	void DebugOutput();
 private:

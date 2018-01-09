@@ -57,7 +57,7 @@ void display()
 		LookAtCentery[0], LookAtCentery[1], LookAtCentery[2],
 		0.0, 1.0, 0.0);
 
-	//glPushMatrix();
+
 	glRotatef(xangle, 1.0, 0.0, 0.0);
 	glRotatef(yangle, 0.0, 1.0, 0.0);
 	glScalef(scale, scale, scale);
@@ -68,9 +68,7 @@ void display()
 		plyLoader.DrawGrids();
 	else if (m_load_type == 2)
 		plyLoader.DrawTriangles();
-	else if (m_load_type == 3)
-		plyLoader.DrawFill();
-	//glPopMatrix();
+
 	
 	glBegin(GL_LINE_STRIP);
 	glVertex3f(0.0, 0.0, 0.0);
@@ -167,7 +165,6 @@ int main(int argc, char* argv[])
 	glutAddMenuEntry("Points", 0);
 	glutAddMenuEntry("Grids", 1);
 	glutAddMenuEntry("Triangles", 2);
-	glutAddMenuEntry("Fill", 3);
 
 	glutCreateMenu(main_menu);
 	glutAddSubMenu("Load Types", c_menu);

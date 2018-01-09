@@ -79,16 +79,6 @@ void CPLYLoader::DrawTriangles()
 	glDrawArrays(GL_TRIANGLES, 0, m_ModelData.modelFaceNums*3);
 }
 
-void CPLYLoader::DrawFill()
-{
-	//// 设置正面为填充模式
-	//glPolygonMode(GL_FRONT, GL_FILL);
-	//// 设置反面为线形模式
-	//glPolygonMode(GL_BACK, GL_LINE);
-
-	glVertexPointer(3, GL_FLOAT, 0, m_ModelData.vecFaceInfo.data());
-	glDrawArrays(GL_POLYGON, 0, m_ModelData.modelFaceNums * 3);
-}
 
 void CPLYLoader::DrawGrids()
 {
