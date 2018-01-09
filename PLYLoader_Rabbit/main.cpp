@@ -7,22 +7,46 @@ static GLint glOrthoscale = 50;
 static GLdouble LookAtEye[] = { 0.0, 0.0, 20.0 }; /* initial viewer location */
 static GLdouble LookAtCentery[] = { 0.0, 0.0, 0.0 }; /* initial viewer location */
 static GLfloat scale = 1;
-//GLfloat position[] = { 50, 50, -50,1 };
-GLfloat position[] = { 1.0, 1.0, -1.0,1.0 };
 GLint m_load_type = 0; /* 0:Points  1:Grids  2:Triangles */
+
+GLfloat L0_position[] = { 1.0, 1.0, -30.0,1.0 };
+GLfloat L1_position[] = { 1.0, 1.0, 30.0,1.0 };
 void init()
 {
 	glClearColor(0, 0, 0, 0);
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnable(GL_COLOR_ARRAY);
+	glShadeModel(GL_SMOOTH);
 	//plyLoader.LoadModel("NewYear.ply2");
 	plyLoader.LoadModel("rabbit.ply2");
 
 	//lighting
 	glEnable(GL_DEPTH_TEST);
-	glLightfv(GL_LIGHT0, GL_POSITION, position);
+
+	//GLfloat L0_position[] = { 1.0, 1.0, -5.0,0.0 };
+	GLfloat L0_ambient[] = { 0.0, 1.0, 0,0, 1.0 };
+	GLfloat L0_diffuse[] = { 0.0, 1.0, 0,0, 1.0 }; //green
+	GLfloat L0_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, L0_position);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, L0_ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, L0_diffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, L0_specular);
+	//GLfloat L1_position[] = { 1.0, 1.0,5.0,0.0 };
+	GLfloat L1_ambient[] = { 1.0, 0.0, 0,0, 1.0 };
+	GLfloat L1_diffuse[] = { 1.0, 0.0, 0,0, 1.0 }; //red
+	GLfloat L1_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+	glLightfv(GL_LIGHT1, GL_POSITION, L1_position);
+	glLightfv(GL_LIGHT1, GL_AMBIENT, L1_ambient);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, L1_diffuse);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, L1_specular);
+
+
+
+	//GLfloat mat_ambient[] = { 0.0f, 0.0f, 0.2f, 1.0f };
+	//glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
+
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
 }
 
 void display()
@@ -32,18 +56,37 @@ void display()
 	gluLookAt(LookAtEye[0], LookAtEye[1], LookAtEye[2], 
 		LookAtCentery[0], LookAtCentery[1], LookAtCentery[2],
 		0.0, 1.0, 0.0);
+
+	//glPushMatrix();
 	glRotatef(xangle, 1.0, 0.0, 0.0);
 	glRotatef(yangle, 0.0, 1.0, 0.0);
 	glScalef(scale, scale, scale);
 
-	if(m_load_type == 0)
+	if (m_load_type == 0)
 		plyLoader.DrawPoints();
-	else if(m_load_type == 1)
+	else if (m_load_type == 1)
 		plyLoader.DrawGrids();
-	else if(m_load_type == 2)
+	else if (m_load_type == 2)
 		plyLoader.DrawTriangles();
+	else if (m_load_type == 3)
+		plyLoader.DrawFill();
+	//glPopMatrix();
+	
+	glBegin(GL_LINE_STRIP);
+	glVertex3f(0.0, 0.0, 0.0);
+	if (L0_position[3] == 0)        /* 10.0 = 'infinite' light */
+		glVertex3f(L0_position[0] * 10.0, L0_position[1] * 10.0, L0_position[2] * 10.0);
+	else
+		glVertex3f(L0_position[0], L0_position[1], L0_position[2]);
+	glEnd();
+	glBegin(GL_LINE_STRIP);
+	glVertex3f(0.0, 0.0, 0.0);
+	if (L0_position[3] == 0)        /* 10.0 = 'infinite' light */
+		glVertex3f(L1_position[0] * 10.0, L1_position[1] * 10.0, L1_position[2] * 10.0);
+	else
+		glVertex3f(L1_position[0], L1_position[1], L1_position[2]);
+	glEnd();
 
-	//glutSolidTeapot(0.4);
 	glFlush();
 	glutSwapBuffers();
 }
@@ -101,8 +144,9 @@ void myReshape(int w, int h)
 	glLoadIdentity();
 	glOrtho(-glOrthoscale, glOrthoscale, -glOrthoscale * (GLfloat)h / (GLfloat)w,
 		glOrthoscale * (GLfloat)h / (GLfloat)w, -glOrthoscale, glOrthoscale);
-	//glFrustum(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+	glFrustum(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 }
 void load_type(int index) {
 	m_load_type = index;
@@ -123,6 +167,7 @@ int main(int argc, char* argv[])
 	glutAddMenuEntry("Points", 0);
 	glutAddMenuEntry("Grids", 1);
 	glutAddMenuEntry("Triangles", 2);
+	glutAddMenuEntry("Fill", 3);
 
 	glutCreateMenu(main_menu);
 	glutAddSubMenu("Load Types", c_menu);
